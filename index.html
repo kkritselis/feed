@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Oswald:wght@500&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<h1>Covid Headlines <span id="demo"></span></h1>
+		<div class="rssDiv">
+			<div id="divRss"></div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/FeedEk.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("#divRss").FeedEk({
+					FeedUrl:
+						"https://www.google.com/alerts/feeds/18387906866369167242/11952592699784238103",
+					MaxCount: 120,
+				});
+
+				let d = new Date();
+				let currTime = d.getTime();
+				console.log(currTime);
+				setInterval(function () {
+					$(".rssDiv").each(function () {
+						this.scrollTop++;
+						let d = new Date();
+						document.getElementById("demo").innerHTML =
+							d.getMonth() +
+							"-" +
+							d.getDate() +
+							"-" +
+							d.getFullYear();
+						if (d.getTime() - currTime > 200000) {
+							window.location.reload(true);
+						}
+					});
+				}, 45);
+			});
+		</script>
+	</body>
+</html>
